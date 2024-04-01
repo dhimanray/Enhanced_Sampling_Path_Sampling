@@ -1,0 +1,21 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+
+cosphi: MATHEVAL ARG=phi FUNC=0.5+cos(x-1.25) PERIODIC=NO
+
+opes: OPES_METAD ...
+  ARG=cosphi
+  PACE=1000000
+  BARRIER=20
+  TEMP=300
+  RESTART=YES
+  FILE=KERNELS
+...
+
+PRINT FMT=%g STRIDE=50 FILE=COLVAR ARG=cosphi,opes.bias
+
+ENDPLUMED
+
