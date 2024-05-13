@@ -13,7 +13,7 @@ if [ -n "$SEG_DEBUG" ] ; then
 fi
 
 cd $WEST_SIM_ROOT/bstates || exit 1 
-plumed driver --plumed $WEST_SIM_ROOT/gromacs_config/plumed_init.dat --mf_pdb input.ala2.pdb
+plumed driver --plumed $WEST_SIM_ROOT/gromacs_config/plumed_init.dat --mf_gro input.ala2.gro
 python init_progress_coord.py > $WEST_PCOORD_RETURN
 
 

@@ -8,4 +8,4 @@
 source env.sh
 
 rm -f west.log
-w_run --work-manager processes "$@" &> west.log
+w_run --work-manager=threads --n-workers=8 "$@" &> west.log

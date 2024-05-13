@@ -76,7 +76,7 @@ elif [ "$WEST_CURRENT_SEG_INITPOINT_TYPE" = "SEG_INITPOINT_NEWTRAJ" ]; then
     $WEST_SIM_ROOT/gromacs_config/md-genvel.mdp > md.mdp
 
   # For a new segment, we only need to make a symbolic link to the .gro file.
-  ln -sv $WEST_PARENT_DATA_REF ./parent.gro
+  ln -sv $WEST_SIM_ROOT/gromacs_config/config.gro ./parent.gro
 
   # Run the GROMACS preprocessor
   gmx_mpi grompp -f md.mdp -c parent.gro -p topol.top \

@@ -1,8 +1,7 @@
 # vim:ft=plumed
 
-MOLINFO STRUCTURE=input.ala2.pdb
-phi: TORSION ATOMS=@phi-2
-psi: TORSION ATOMS=@psi-2
+phi: TORSION ATOMS=5,7,9,15
+psi: TORSION ATOMS=7,9,15,17
 
 cosphi: MATHEVAL ARG=phi FUNC=0.5+cos(x-1.25) PERIODIC=NO
 
@@ -15,7 +14,7 @@ opes: OPES_METAD ...
   FILE=KERNELS
 ...
 
-PRINT FMT=%g STRIDE=50 FILE=COLVAR ARG=cosphi,opes.bias
+PRINT FMT=%g STRIDE=1 FILE=COLVAR ARG=cosphi,opes.bias
 
 ENDPLUMED
 

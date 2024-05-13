@@ -9,7 +9,7 @@ T = 300 #Temperature in K
 
 biasColumn = 3 #Column in which the bias is printed in the COLVAR file
 
-dt = 0.1 #The frequency at which colvars is deposited (in ps)
+dt = 0.002 #The frequency at which colvars is deposited (in ps)
 
 time_unit = 10**12 #in ps
 
@@ -18,13 +18,13 @@ kT = 0.008273338*T #in kJ/mol
 #===========================================================
 
 #print all successful transitions
-os.system('w_succ > successful.txt')
+#os.system('w_succ > successful.txt')
 ss = np.loadtxt('successful.txt')
 
 #open some files and folders
 os.system('mkdir traces')
 f1 = open('time_data.txt','w')
-print('#Transition #Time (s) #weight from WE',file=f1) 
+print('#Transition #Iteration #SegmentID #Time (s) #weight from WE',file=f1) 
 
 for j in range(len(ss)):
     #trace the path of each successful transition to the beginning
@@ -51,7 +51,7 @@ for j in range(len(ss)):
     rescaled_time = c/time_unit
     weight = ss[j,2] 
 
-    print(j+1,rescaled_time,weight,file=f1)
+    print(j+1,ss[j,0],ss[j,1],rescaled_time,weight,file=f1)
 
     #move unnecessary trace files to the traces folder
     os.system('mv traj_%d_%d_trace.txt traces/'%(ss[j,0],ss[j,1]))
