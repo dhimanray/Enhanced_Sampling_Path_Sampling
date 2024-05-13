@@ -1,0 +1,17 @@
+# --- (1) ATOMS DEFINITIONS and ALIGNMENT ---
+
+HOST: GROUP ATOMS=29-224      #host atoms
+LIGC: GROUP ATOMS=1-11  #carbon atoms in the ligand
+
+WHOLEMOLECULES ENTITY0=HOST
+FIT_TO_TEMPLATE STRIDE=1 REFERENCE=conf_template.pdb TYPE=OPTIMAL #coordinates alignment
+lig: CENTER ATOMS=LIGC
+
+v1: FIXEDATOM AT=2.0136,2.0136,2.0   #virtual atoms
+
+cyl: DISTANCE ATOMS=v1,lig COMPONENTS
+
+
+PRINT ARG=cyl.z STRIDE=1 FILE=COLVAR FMT=%8.4f
+
+ENDPLUMED
