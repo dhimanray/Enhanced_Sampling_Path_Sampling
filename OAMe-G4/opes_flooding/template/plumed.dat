@@ -1,0 +1,47 @@
+# --- (1) ATOMS DEFINITIONS and ALIGNMENT ---
+
+HOST: GROUP ATOMS=29-224      #host atoms
+LIGC: GROUP ATOMS=1-11  #carbon atoms in the ligand
+
+WHOLEMOLECULES ENTITY0=HOST
+FIT_TO_TEMPLATE STRIDE=1 REFERENCE=conf_template.pdb TYPE=OPTIMAL #coordinates alignment
+lig: CENTER ATOMS=LIGC
+
+v1: FIXEDATOM AT=2.0136,2.0136,2.0   #virtual atoms
+v3: FIXEDATOM AT=2.0136,2.0136,2.5
+v5: FIXEDATOM AT=2.0136,2.0136,3.0
+
+
+ang: ANGLE ATOMS=v3,v5,6,11   #angle of a ligand's axis with z
+cosang: MATHEVAL ARG=ang FUNC=cos(x) PERIODIC=NO
+
+cyl: DISTANCE ATOMS=v1,lig COMPONENTS
+radius: MATHEVAL ARG=cyl.x,cyl.y FUNC=sqrt(x*x+y*y) PERIODIC=NO
+
+
+#funnel: MATHEVAL ARG=radius,cyl.z VAR=r,z FUNC=(r+1.0*(-1.2+z))*step(-z+1.)+(r-0.2)*step(z-1.) PERIODIC=NO
+#UPPER_WALLS AT=0 ARG=funnel KAPPA=2000.0 LABEL=funnelwall  #funnel restraint
+#UPPER_WALLS AT=1.8 ARG=cyl.z KAPPA=4000.0 EXP=2 LABEL=upper_wall  #upper limit of cyl.z
+
+
+chi_exc: CUSTOM ARG=cyl.z FUNC=step(x-0.7) PERIODIC=NO
+
+opes: OPES_METAD ...
+  ARG=cyl.z
+  PACE=500
+  BARRIER=20
+  TEMP=300
+  EXCLUDED_REGION=chi_exc
+...
+
+
+COMMITTOR ...
+ ARG=cyl.z
+ STRIDE=100
+ BASIN_LL1=1.6
+ BASIN_UL1=3.0
+... COMMITTOR
+
+PRINT ARG=cyl.z,cosang,opes.bias STRIDE=10 FILE=COLVAR FMT=%8.4f
+
+ENDPLUMED
