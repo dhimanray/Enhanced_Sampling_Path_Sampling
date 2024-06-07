@@ -1,0 +1,30 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+
+cosphi: MATHEVAL ARG=phi FUNC=0.5+cos(x-1.25) PERIODIC=NO
+
+chi_exc: CUSTOM ARG=cosphi FUNC=step(x-0.4) PERIODIC=NO
+
+opesf: OPES_METAD ...
+  ARG=cosphi
+  PACE=500
+  BARRIER=20
+  TEMP=300
+  EXCLUDED_REGION=chi_exc
+...
+
+
+COMMITTOR ...
+ ARG=cosphi
+ STRIDE=1
+ BASIN_LL1=1.4
+ BASIN_UL1=1.6
+... COMMITTOR
+
+PRINT FMT=%g STRIDE=1 FILE=COLVAR ARG=phi,psi,cosphi,opesf.bias
+
+ENDPLUMED
+
