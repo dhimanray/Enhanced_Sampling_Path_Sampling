@@ -1,0 +1,63 @@
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Invalid MIT-MAGIC-COOKIE-1 keyInvalid MIT-MAGIC-COOKIE-1 keyhwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Invalid MIT-MAGIC-COOKIE-1 keyPLUMED: PLUMED is starting
+PLUMED: Version: 2.11.0-dev (git: 9045979ca) compiled on Sep 25 2024 at 15:31:59
+PLUMED: Please cite these papers when using PLUMED [1][2]
+PLUMED: For further information see the PLUMED web page at http://www.plumed.org
+PLUMED: Root: /home/ray-lab1/plumed2-master/
+PLUMED: LibraryPath: /home/ray-lab1/plumed2-master/src/lib/libplumedKernel.so
+PLUMED: For installed feature, see /home/ray-lab1/plumed2-master//src/config/config.txt
+PLUMED: Molecular dynamics engine: driver
+PLUMED: Precision of reals: 8
+PLUMED: Running over 1 node
+PLUMED: Number of threads: 1
+PLUMED: Cache line size: 512
+PLUMED: Number of atoms: 22
+PLUMED: File suffix: 
+PLUMED: FILE: /home/ray-lab1/Dhiman/Enhanced_Sampling_Path_Sampling/ala2/only_we/westpa_mab/gromacs_config/plumed_init.dat
+PLUMED: Action TORSION
+PLUMED:   with label phi
+PLUMED:   between atoms 5 7 9 15
+PLUMED:   using periodic boundary conditions
+PLUMED: Action TORSION
+PLUMED:   with label psi
+PLUMED:   between atoms 7 9 15 17
+PLUMED:   using periodic boundary conditions
+PLUMED: Action MATHEVAL
+PLUMED:   with label cosphi
+PLUMED:   with arguments : 
+PLUMED:    scalar with label phi 
+PLUMED:   with function : 0.5+cos(x-1.25)
+PLUMED:   with variables : x
+PLUMED:   function as parsed by lepton: 0.5+(cos(-1.25+(x)))
+PLUMED:   derivatives as computed by lepton:
+PLUMED:     -(sin(-1.25+(x)))
+PLUMED:   not calculating when all arguments are zero 
+PLUMED: Action PRINT
+PLUMED:   with label @6
+PLUMED:   with stride 1
+PLUMED:   with arguments : 
+PLUMED:    scalar with label cosphi 
+PLUMED:   on file COLVAR
+PLUMED:   with format  %g
+PLUMED: Action ENDPLUMED
+PLUMED:   with label @7
+PLUMED: END FILE: /home/ray-lab1/Dhiman/Enhanced_Sampling_Path_Sampling/ala2/only_we/westpa_mab/gromacs_config/plumed_init.dat
+PLUMED: Timestep: 1.000000
+PLUMED: KbT has not been set by the MD engine
+PLUMED: It should be set by hand where needed
+PLUMED: Relevant bibliography:
+PLUMED: Please read and cite where appropriate!
+PLUMED: Finished setup
+PLUMED:                                               Cycles        Total      Average      Minimum      Maximum
+PLUMED:                                                    1     0.000952     0.000952     0.000952     0.000952
+PLUMED: 1 Prepare dependencies                             1     0.000001     0.000001     0.000001     0.000001
+PLUMED: 2 Sharing data                                     1     0.000017     0.000017     0.000017     0.000017
+PLUMED: 3 Waiting for data                                 1     0.000003     0.000003     0.000003     0.000003
+PLUMED: 4 Calculating (forward loop)                       1     0.000010     0.000010     0.000010     0.000010
+PLUMED: 5 Applying (backward loop)                         1     0.000002     0.000002     0.000002     0.000002
+PLUMED: 6 Update                                           1     0.000015     0.000015     0.000015     0.000015
